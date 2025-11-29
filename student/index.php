@@ -129,6 +129,18 @@ $inspirational_quotes = [
 
 // Select a random quote
 $daily_quote = $inspirational_quotes[array_rand($inspirational_quotes)];
+
+// Include notices component
+$notices_path = __DIR__ . '/../admin/notices_component.php';
+if (!file_exists($notices_path)) {
+    $notices_path = __DIR__ . '/notices_component.php';
+}
+if (file_exists($notices_path)) {
+    require_once $notices_path;
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -1108,6 +1120,12 @@ tbody td:first-child {
             <a href="teachercall.php" class="btn btn-primary">📞 Call Teacher</a>
             <a href="chat.php" class="btn btn-info">💬 Messages</a>
         </div>
+ <?php 
+        if (function_exists('displayNotices')) {
+            displayNotices('student'); 
+        }
+        ?>
+
 
         <!-- Notifications Section -->
         <div class="notifications-container">
